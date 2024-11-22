@@ -1,4 +1,5 @@
 from skbuild import setup
+from setuptools import find_packages
 import re
 import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -6,9 +7,9 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 try:
     import pypandoc
-    long_description = pypandoc.convert('README.md', 'r')
+    long_description = pypandoc.convert("README.md", "r")
 except(IOError, ImportError):
-    long_description = open('README.md').read()
+    long_description = open("README.md").read()
 
 with open(f"{dir_path}/CMakeLists.txt") as file:
     for line in file:
@@ -26,14 +27,14 @@ setup(
     author="Michaud, Benjamin and Begon, Mickaël",
     description="Easy to use C3D reader/writer for C++, Python and Matlab",
     long_description=long_description,
-    long_description_content_type= 'text/markdown',
-    url = 'https://github.com/pyomeca/ezc3d',
+    long_description_content_type= "text/markdown",
+    url = "https://github.com/pyomeca/ezc3d",
     license="MIT",
-    packages=['ezc3d'],
+    packages=["ezc3d"],
     cmake_args=[
-        '-DBUILD_EXAMPLE:BOOL=OFF',
-        '-DBINDER_PYTHON3:BOOL=ON',
-        '-DCMAKE_INSTALL_BINDIR=ezc3d',
-        '-DCMAKE_INSTALL_LIBDIR=ezc3d'
+        "-DBUILD_EXAMPLE:BOOL=OFF",
+        "-DBINDER_PYTHON3:BOOL=ON",
+        "-DCMAKE_INSTALL_BINDIR=ezc3d",
+        "-DCMAKE_INSTALL_LIBDIR=ezc3d"
     ],
 )
