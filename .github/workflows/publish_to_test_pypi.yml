@@ -51,7 +51,7 @@ jobs:
           
       - name: Install dependencies
         run: | 
-          mamba install cmake git pkgconfig swig numpy pip scikit-build -cconda-forge
+          mamba install cmake git pkgconfig swig numpy pip scikit-build build -cconda-forge
           mamba list
 
       - name: Install cibuildwheel on Linux

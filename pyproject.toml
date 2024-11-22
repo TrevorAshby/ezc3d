@@ -7,7 +7,6 @@ requires = [
     "ninja",
     "swig",
     "numpy",
-    "build",
 ]
 build-backend = "setuptools.build_meta"
 
