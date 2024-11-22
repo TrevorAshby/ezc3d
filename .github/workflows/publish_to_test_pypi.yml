@@ -63,7 +63,7 @@ jobs:
         if: matrix.label == 'linux-64'
 
       - name: Build wheels on Mac or Windows
-        run: python -m build
+        run: python -m build --sdist --wheel
         if: matrix.label != 'linux-64'
       
       - name: Store the distribution packages
