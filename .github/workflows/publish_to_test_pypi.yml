@@ -83,19 +83,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: python-package-distributions-${{ matrix.label }}
-          path: dist-${{ matrix.label }}/
+          path: dist/
           
   publish-to-pypi:
-    strategy:
-      matrix:
-        include:
-          # - os: ubuntu-latest
-          #   label: linux-64
-          - os: macos-latest
-            label: osx-64
-          - os: windows-latest
-            label: win-64
-    name: ${{ matrix.label }}
+    name: Publish to PyPI
     needs:
     - build
 
@@ -111,8 +102,9 @@ jobs:
     - name: Download all the dists
       uses: actions/download-artifact@v4
       with:
-        name: python-package-distributions-${{ matrix.label }}
-        path: dist-${{ matrix.label }}/
+        pattern: python-package-distributions-*
+        path: dist/
+        merge-multiple: true
 
     - name: Publish distribution to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
@@ -125,7 +117,7 @@ jobs:
 
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/<package-name>
+      url: https://test.pypi.org/p/ezc3d
 
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
@@ -134,8 +126,9 @@ jobs:
     - name: Download all the dists
       uses: actions/download-artifact@v4
       with:
-        name: python-package-distributions-${{ matrix.label }}
-        path: dist-${{ matrix.label }}/
+        pattern: python-package-distributions-*
+        path: dist/
+        merge-multiple: true
 
     - name: Publish distribution to TestPyPI
       uses: pypa/gh-action-pypi-publish@release/v1
