@@ -54,17 +54,23 @@ jobs:
           mamba install cmake git pkgconfig swig numpy pip scikit-build -cconda-forge
           mamba list
 
-      - name: Install cibuildwheel
+      - name: Install cibuildwheel on Linux
         run: python -m pip install cibuildwheel==2.21.3
+        if: matrix.label == 'linux-64'
 
-      - name: Build wheels
-        run: python -m cibuildwheel --output-dir wheelhouse
+      - name: Build wheels on Linux
+        run: python -m cibuildwheel --output-dir dist
+        if: matrix.label == 'linux-64'
+
+      - name: Build wheels on Mac or Windows
+        run: python -m build
+        if: matrix.label != 'linux-64'
       
       - name: Store the distribution packages
         uses: actions/upload-artifact@v4
         with:
           name: python-package-distributions-${{ matrix.label }}
-          path: wheelhouse/*.whl/
+          path: dist/*.whl/
           
   publish-to-pypi:
     name: Publish to PyPI
@@ -84,7 +90,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         pattern: python-package-distributions-*
-        path: wheelhouse/
+        path: dist/
         merge-multiple: true
 
     - name: Publish distribution to PyPI
@@ -108,7 +114,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         pattern: python-package-distributions-*
-        path: wheelhouse/
+        path: dist/
         merge-multiple: true
 
     - name: Publish distribution to TestPyPI
