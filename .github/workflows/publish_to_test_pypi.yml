@@ -12,15 +12,15 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
-            label: linux-64
-            prefix: /usr/share/miniconda3/envs/ezc3d
+          # - os: ubuntu-latest
+          #   label: linux-64
+          #   prefix: /usr/share/miniconda3/envs/ezc3d
           # - os: macos-latest
           #   label: osx-64
           #   prefix: /Users/runner/miniconda3/envs/ezc3d
-          # - os: windows-latest
-          #   label: win-64
-          #   prefix: C:\Miniconda3\envs\ezc3d
+          - os: windows-latest
+            label: win-64
+            prefix: C:\Miniconda3\envs\ezc3d
     name: ${{ matrix.label }}
     runs-on: ${{ matrix.os }}
     defaults:
