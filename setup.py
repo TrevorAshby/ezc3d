@@ -16,7 +16,7 @@ setup(
     # NOTE: Could still add stuff like homepage or author mail, but since this isn't used to redistribute, not important
     name="ezc3d",
     version=version,
-    description=" Easy to use C3D reader/writer for C++, Python and Matlab",
+    description="Easy to use C3D reader/writer for C++, Python and Matlab",
     author="Michaud, Benjamin and Begon, Mickaël",
     license="MIT",
     packages=['ezc3d'],
