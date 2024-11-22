@@ -60,7 +60,11 @@ jobs:
         if: matrix.label == 'linux-64'
 
       - name: Build wheels on Linux
-        run: python -m cibuildwheel --output-dir dist
+        uses: pypa/cibuildwheel@v2.21.3
+        with:
+          output-dir: dist
+          config-file: "pyproject.toml"
+
         if: matrix.label == 'linux-64'
 
       - name: Build wheels on Mac or Windows
