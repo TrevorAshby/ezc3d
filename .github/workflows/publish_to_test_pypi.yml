@@ -12,9 +12,9 @@ jobs:
     strategy:
       matrix:
         include:
-          # - os: ubuntu-latest
-          #   label: linux-64
-          #   prefix: /usr/share/miniconda3/envs/ezc3d
+          - os: ubuntu-latest
+            label: linux-64
+            prefix: /usr/share/miniconda3/envs/ezc3d
           - os: macos-latest
             label: osx-64
             prefix: /Users/runner/miniconda3/envs/ezc3d
@@ -54,14 +54,17 @@ jobs:
           mamba install cmake git pkgconfig swig numpy pip scikit-build -cconda-forge
           mamba list
 
-      - name: Build the binary wheel
-        run: python setup.py sdist bdist_wheel
+      - name: Install cibuildwheel
+        run: python -m pip install cibuildwheel==2.21.3
+
+      - name: Build wheels
+        run: python -m cibuildwheel --output-dir wheelhouse
       
       - name: Store the distribution packages
         uses: actions/upload-artifact@v4
         with:
           name: python-package-distributions-${{ matrix.label }}
-          path: dist/
+          path: wheelhouse/*.whl/
           
   publish-to-pypi:
     name: Publish to PyPI
@@ -81,7 +84,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         pattern: python-package-distributions-*
-        path: dist/
+        path: wheelhouse/
         merge-multiple: true
 
     - name: Publish distribution to PyPI
@@ -105,7 +108,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         pattern: python-package-distributions-*
-        path: dist/
+        path: wheelhouse/
         merge-multiple: true
 
     - name: Publish distribution to TestPyPI
