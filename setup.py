@@ -1,5 +1,4 @@
 from skbuild import setup
-from setuptools import find_packages
 import re
 import os
 dir_path = os.path.dirname(os.path.realpath(__file__))

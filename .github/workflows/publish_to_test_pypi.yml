@@ -64,7 +64,6 @@ jobs:
         with:
           output-dir: dist
           config-file: "pyproject.toml"
-
         if: matrix.label == 'linux-64'
 
       - name: Build wheels on Mac or Windows
