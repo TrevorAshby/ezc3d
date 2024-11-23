@@ -85,7 +85,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: python-package-distributions-${{ matrix.label }}
-          path: dist/*.whl/
+          path: dist/
         if: matrix.label != 'linux-64'
           
   publish-to-pypi:
