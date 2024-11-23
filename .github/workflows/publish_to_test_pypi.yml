@@ -62,12 +62,19 @@ jobs:
       - name: Build wheels on Linux
         uses: pypa/cibuildwheel@v2.21.3
         with:
-          output-dir: dist
           config-file: "pyproject.toml"
         env:
           CIBW_SKIP: "pp*-manylinux_i686"
           CIBW_BEFORE_BUILD: >-
             rm -rf _skbuild
+        if: matrix.label == 'linux-64'
+
+      - name: Store the wheels on Linux
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions-${{ matrix.label }}
+          path: ./wheelhouse/*.whl
+          if-no-files-found: error
         if: matrix.label == 'linux-64'
 
       - name: Build wheels on Mac or Windows
@@ -79,6 +86,7 @@ jobs:
         with:
           name: python-package-distributions-${{ matrix.label }}
           path: dist/*.whl/
+        if: matrix.label != 'linux-64'
           
   publish-to-pypi:
     name: Publish to PyPI
