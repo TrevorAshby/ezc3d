@@ -8,6 +8,8 @@ exclude MANIFEST.in
 recursive-include _skbuild *.so
 recursive-include _skbuild *.dll
 recursive-include _skbuild *.dylib
+recursive-include _skbuild *.pyd
+recursive-include _skbuild *.lib
 recursive-include _skbuild *.py
 
 # Exclude source and development files

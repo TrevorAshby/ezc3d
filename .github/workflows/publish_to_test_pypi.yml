@@ -64,6 +64,9 @@ jobs:
         with:
           output-dir: dist
           config-file: "pyproject.toml"
+        env:
+          CIBW_BEFORE_BUILD: >-
+            rm -rf _skbuild
         if: matrix.label == 'linux-64'
 
       - name: Build wheels on Mac or Windows
