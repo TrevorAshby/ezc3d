@@ -24,8 +24,6 @@ license = {text = "MIT"}
 urls = { "Homepage" = "https://github.com/pyomeca/ezc3d" }
 requires-python = ">=3.10"
 
-[tool.setuptools]
-packages = {find = {}}
 
 [tool.cibuildwheel]
 build-frontend = "build"

@@ -1,4 +1,5 @@
 from skbuild import setup
+from pathlib import Path
 import re
 import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -19,6 +20,9 @@ with open(f"{dir_path}/CMakeLists.txt") as file:
     else:
         raise RuntimeError("Version not found")
 
+# Create an empty 'ezc3d' folder if it doesn't exist (stub for setup.py)
+Path("ezc3d").mkdir(exist_ok=True)
+
 setup(
     # NOTE: Could still add stuff like homepage or author mail, but since this isn't used to redistribute, not important
     name="ezc3d",
@@ -34,6 +38,6 @@ setup(
         "-DBUILD_EXAMPLE:BOOL=OFF",
         "-DBINDER_PYTHON3:BOOL=ON",
         "-DCMAKE_INSTALL_BINDIR=ezc3d",
-        "-DCMAKE_INSTALL_LIBDIR=ezc3d"
+        "-DCMAKE_INSTALL_LIBDIR=ezc3d",
     ],
 )
