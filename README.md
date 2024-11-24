@@ -17,6 +17,7 @@ So, without further ado, let's begin C3Ding!
 - [Table of Contents](#table-of-contents)
   - [Headers](#headers)
 - [How to install](#how-to-install)
+  - [Pip (For Python users on Windows, Linux and Mac)](#pip-for-python-users-on-windows-linux-and-mac)
   - [Anaconda (For Python users on Windows, Linux and Mac)](#anaconda-for-python-users-on-windows-linux-and-mac)
   - [Download binaries (For MATLAB users on Windows, Linux and Mac)](#download-binaries-for-matlab-users-on-windows-linux-and-mac)
   - [Compiling (For Windows, Linux and Mac)](#compiling-for-windows-linux-and-mac)
@@ -61,10 +62,17 @@ So, without further ado, let's begin C3Ding!
 ## Headers
 
 # How to install
-There are two main ways to install EZC3D on your computer: the easy method, installing the binaries from Anaconda (Python users) or from the Release page (Matlab users); or the hard method, compiling the source code yourself (more versatile and up to date).
+There are two main ways to install EZC3D on your computer: the easy method, installing the binaries from pip or Anaconda (Python users) or from the Release page (Matlab users); or the hard method, compiling the source code yourself (more versatile and up to date).
+
+## Pip (For Python users on Windows, Linux and Mac)
+For Python users, the easiest way to install EZC3D is to install it using the pip command. Simply type in a shell:
+```bash
+pip install ezc3d
+```
+assuming pip is installed and, voilà! 
 
 ## Anaconda (For Python users on Windows, Linux and Mac)
-For Python users, the easiest way to install EZC3D is to download the binaries from anaconda (https://anaconda.org/) repositories (while binaries are available for Python3 and Octave, there are not any for MATLAB, apart from using the mex file produced for Octave). The project is hosted on the conda-forge channel (https://anaconda.org/conda-forge/ezc3d).
+For Python users, the second easiest way to install EZC3D is to download the binaries from anaconda (https://anaconda.org/) repositories (while binaries are available for Python3 and Octave, there are not any for MATLAB, apart from using the mex file produced for Octave). The project is hosted on the conda-forge channel (https://anaconda.org/conda-forge/ezc3d).
 
 After having installed properly an anaconda client [my suggestion would be Miniconda (https://conda.io/miniconda.html)] and loaded the desired environment to install EZC3D in, just type the following command for installing the Python3 binaries:
 ```bash
@@ -180,16 +188,11 @@ An automated script for compilation is offered on vcpkg. Install vcpkg by making
 👀 EZC3D is available in VCPKG since [2020-11 release](https://github.com/microsoft/vcpkg/releases/tag/2020.11)
 
 ## Compile via `setup.py`
-This way of "installing" is mostly for convenience when developing on ezc3d and the python-wrapper. It is **not** recommended for normal usage. Refer to [Anaconda](#anaconda-for-windows-linux-and-mac) for that.
+This way of "installing" is mostly for convenience when developing on ezc3d and the python-wrapper. It is **not** recommended for normal usage. Refer to [Anaconda](#anaconda-for-windows-linux-and-mac) for that, simply call:
+```bash
+python install .
+```
 
-The call is similar to the following (example for windows).
-```powershell
-python .\setup.py sdist bdist_wheel -- -G"Visual Studio 17 2022" -A x64 -DSWIG_EXECUTABLE="D:/swigwin-4.0.2/swig.exe" -DSWIG_DIR="D:/swigwin-4.0.2/Lib"
-```
-The wheel file in the `dist` folder can be installed via `pip`:
-```powershell
-pip install ./dist/zzz.whl
-```
 
 # How to use
 The aim of EZC3D is to be, indeed, eazy to use. Still, it is a C++ library and therefore requires some time to adapt. This section aims to help you level up as fast as possible, in order to enjoy EZC3D as fast as possible. 
