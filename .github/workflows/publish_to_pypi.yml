@@ -55,7 +55,7 @@ jobs:
           mamba list
           pip install build cibuildwheel==2.21.3
 
-      - name: Build wheels on Linux
+      - name: Build wheels
         uses: pypa/cibuildwheel@v2.21.3
         with:
           config-file: "pyproject.toml"
