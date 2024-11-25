@@ -2,7 +2,8 @@
 include setup.py pyproject.toml
 include environment.yml
 include LICENSE README.md
-exclude MANIFEST.in 
+include MANIFEST.in 
+exclude PKG-INFO
 
 # Include shared libraries or compiled files (if needed for runtime).
 prune *.data
@@ -14,24 +15,20 @@ recursive-include ezc3d *.lib
 recursive-include ezc3d *.py
 
 # Exclude source and development files
-exclude CMakeLists.txt
-exclude *.cmake.in
-exclude binding/*
-exclude include/*
+include CMakeLists.txt *.cmake.in
+recursive-include binding/*
+recursive-include include/*
+recursive-include modules/*
+recursive-include share/*
+recursive-include src/*
+exclude .github/*
 exclude logo/*
-exclude modules/*
-exclude share/*
-exclude src/*
 exclude external/*
-exclude _skbuild
-prune binding/*
-prune include/*
+exclude _skbuild/*
+prune .github/*
 prune logo/*
-prune modules/*
-prune share/*
-prune src/*
 prune external/*
-prune _skbuild
+prune _skbuild/*
 
 # Exclude docs, tests and example data
 exclude doc/*

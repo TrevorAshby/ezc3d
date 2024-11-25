@@ -49,15 +49,11 @@ jobs:
           mamba info
           mamba list
           
-      - name: Install dependencies
+      - name: Install build packages
         run: | 
-          mamba install cmake git pkgconfig swig numpy pip scikit-build -cconda-forge
+          mamba install python pip -cconda-forge
           mamba list
-          pip install build
-
-      - name: Install cibuildwheel on Linux
-        run: python -m pip install cibuildwheel==2.21.3
-        if: matrix.label == 'linux-64'
+          pip install build cibuildwheel==2.21.3
 
       - name: Build wheels on Linux
         uses: pypa/cibuildwheel@v2.21.3
@@ -67,27 +63,25 @@ jobs:
           CIBW_SKIP: "pp*-manylinux_i686"
           CIBW_BEFORE_BUILD: >-
             rm -rf _skbuild
-        if: matrix.label == 'linux-64'
 
-      - name: Store the wheels on Linux
+      - name: Store the wheels
         uses: actions/upload-artifact@v4
         with:
           name: python-package-distributions-${{ matrix.label }}
           path: ./wheelhouse/*.whl
           if-no-files-found: error
+
+      - name: Make the source distribution (only on one platform)
+        run: python -m build --sdist --wheel
         if: matrix.label == 'linux-64'
 
-      - name: Build wheels on Mac or Windows
-        run: python -m build --sdist --wheel
-        if: matrix.label != 'linux-64'
-      
-      - name: Store the distribution packages
+      - name: Upload the source distribution (only on one platform)
         uses: actions/upload-artifact@v4
         with:
-          name: python-package-distributions-${{ matrix.label }}
-          path: dist/
-        if: matrix.label != 'linux-64'
-          
+          name: python-package-sdist-${{ matrix.label }}
+          path: dist/*.tar.gz
+        if: matrix.label == 'linux-64'
+                  
   publish-to-pypi:
     name: Publish to PyPI
     needs:
@@ -105,7 +99,7 @@ jobs:
     - name: Download all the dists
       uses: actions/download-artifact@v4
       with:
-        pattern: python-package-distributions-*
+        pattern: python-package-*
         path: dist/
         merge-multiple: true
 
