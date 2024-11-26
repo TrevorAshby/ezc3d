@@ -11,7 +11,7 @@ option(BUILD_EXAMPLE "Build a C++ example" ON)
 option(BUILD_DOC "Build documentation" OFF)
 option(GET_OFFICIAL_DOCUMENTATION "Automatically download the C3D documentation" OFF)
 option(BUILD_TESTS "Build all tests." OFF) # Makes boolean 'test' available.
-option(BINDER_PYTHON3 "Build Python SWIG module" OFF)
+option(BINDER_PYTHON3 "Build Python SWIG module" ON)
 option(BINDER_MATLAB "Build Matlab module" OFF)
 option(BINDER_OCTAVE "Build Octave module" OFF)
 
