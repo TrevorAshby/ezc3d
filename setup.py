@@ -9,7 +9,7 @@ try:
     import pypandoc
     long_description = pypandoc.convert("README.md", "r")
 except(IOError, ImportError):
-    long_description = open("README.md").read()
+    long_description = open(f"{dir_path}/README.md").read()
 
 with open(f"{dir_path}/CMakeLists.txt") as file:
     for line in file:
