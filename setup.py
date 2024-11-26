@@ -26,7 +26,7 @@ Path("ezc3d").mkdir(exist_ok=True)
 setup(
     # NOTE: Could still add stuff like homepage or author mail, but since this isn't used to redistribute, not important
     name="ezc3d",
-    version=version,
+    version="1.5.17",
     author="Michaud, Benjamin and Begon, Mickaël",
     description="Easy to use C3D reader/writer for C++, Python and Matlab",
     long_description=long_description,
